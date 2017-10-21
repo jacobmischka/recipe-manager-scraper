@@ -24,32 +24,32 @@ def get_title(soup):
 	return soup.find('h1').get_text(strip=True)
 
 def get_description(soup):
-	return soup.find('meta', attrs={'name': 'description'}).get('content')
+	return soup.find('meta', attrs={'property': 'og:description'}).get('content')
 
 def get_image(soup):
-	return soup.find(class_='recipe-main-photo').find('img').get('src')
+	return soup.find('meta', attrs={'property': 'og:image'}).get('content')
 
 def get_info(soup):
-	about = soup.find(class_='recipe-about')
+	container = soup.find(class_='post-dek-meta')
 
 	servings = None
 	try:
-		recipe_yield = about.find(class_='yield').get_text(strip=True)
-		servings = get_servings_from_str(recipe_yield)[0]
+		servings = container.find(class_='recipe__header__servings').get_text(strip=True)
+		servings = get_servings_from_str(servings)[0]
 	except Exception as e:
 		print(e, file=sys.stderr)
 
 	times = {}
-	for li in about.find_all('li'):
-		label = li.find(class_='label').get_text(strip=True)
-		if 'time' in label:
-			try:
-				time_type = label.replace('time:', '').strip().lower()
-				info = li.find(class_='info').get_text(strip=True)
-				times[time_type] = info
+	for li in container.find_all(class_='recipe__header__times'):
+		label = li.get_text(strip=True)
+		try:
+			[time_type, time_val] = label.split(':')
+			time_type = time_type.lower().replace('time', '').strip()
+			time_val = time_val.strip()
+			times[time_type] = time_val
 
-			except Exception as e:
-				print(e, file=sys.stderr)
+		except Exception as e:
+			print(e, file=sys.stderr)
 
 	return {
 		'servings': servings,
@@ -58,12 +58,12 @@ def get_info(soup):
 
 
 def get_ingredients(soup):
-	container = soup.find(class_='recipe-ingredients')
+	container = soup.find(class_='ingredients')
 	return [li.get_text(strip=True) for li in container.find_all(class_='ingredient')]
 
 def get_directions(soup):
-	container = soup.find(class_='recipe-procedures')
-	return [item.get_text(strip=True) for item in container.find_all(class_='recipe-procedure-text')]
+	container = soup.find(class_='steps')
+	return [item.get_text(strip=True) for item in container.find_all(class_='step')]
 
 def main():
 	pass
