@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from bs4 import BeautifulSoup
 from requests import get
 import sys
@@ -94,9 +92,3 @@ def get_directions(soup):
 		return [item.get_text(strip=True) for item in container.find_all(class_='step')]
 	except Exception as e:
 		print(e, file=sys.stderr)
-
-def main():
-	pass
-
-if __name__ == '__main__':
-	main()

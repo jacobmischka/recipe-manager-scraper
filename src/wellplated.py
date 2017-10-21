@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-
 from bs4 import BeautifulSoup
 from requests import get
 from isodate import parse_duration
-from datetime import datetime
 import sys
 
 from recipe import Recipe
@@ -110,9 +107,3 @@ def get_directions(soup):
 		print(e, file=sys.stderr)
 
 	return None
-
-def main():
-	pass
-
-if __name__ == '__main__':
-	main()
