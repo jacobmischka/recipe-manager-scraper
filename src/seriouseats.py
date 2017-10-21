@@ -44,7 +44,7 @@ class SeriousEatsRecipe(Recipe):
 			container = soup.find(class_='recipe-ingredients')
 			return [li.get_text(strip=True) for li in container.find_all(class_='ingredient')]
 		except Exception as e:
-			print(e, file=sys.stderr)
+			print('Failed to get ingredients: {}'.format(e), file=sys.stderr)
 
 		return None
 
@@ -54,6 +54,6 @@ class SeriousEatsRecipe(Recipe):
 			container = soup.find(class_='recipe-procedures')
 			return [item.get_text(strip=True) for item in container.find_all(class_='recipe-procedure-text')]
 		except Exception as e:
-			print(e, file=sys.stderr)
+			print('Failed to get directions: {}'.format(e), file=sys.stderr)
 
 		return None

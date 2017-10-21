@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from bs4 import BeautifulSoup
 from requests import get
 
@@ -19,9 +17,3 @@ def fetch_recipe(url):
 		return WellPlatedRecipe.from_soup(soup)
 	else:
 		return Recipe.from_soup(soup)
-
-def main():
-	pass
-
-if __name__ == '__main__':
-	main()

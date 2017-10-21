@@ -16,7 +16,7 @@ class BonAppetitRecipe(Recipe):
 				servings = container.find(class_='recipe__header__servings').get_text(strip=True)
 				servings = get_servings_from_str(servings)[0]
 			except Exception as e:
-				print(e, file=sys.stderr)
+				print('Failed to get servings: {}'.format(e), file=sys.stderr)
 
 			for li in container.find_all(class_='recipe__header__times'):
 				label = li.get_text(strip=True)
@@ -27,9 +27,9 @@ class BonAppetitRecipe(Recipe):
 					times[time_type] = time_val
 
 				except Exception as e:
-					print(e, file=sys.stderr)
+					print('Failed to get time: {}'.format(e), file=sys.stderr)
 		except Exception as e:
-			print(e, file=sys.stderr)
+			print('Failed to get info: {}'.format(e), file=sys.stderr)
 
 		return {
 			'servings': servings,
@@ -43,7 +43,9 @@ class BonAppetitRecipe(Recipe):
 			container = soup.find(class_='ingredients')
 			return [li.get_text(strip=True) for li in container.find_all(class_='ingredient')]
 		except Exception as e:
-			print(e, file=sys.stderr)
+			print('Failed to get ingredients: {}'.format(e), file=sys.stderr)
+
+		return None
 
 	@classmethod
 	def get_directions(cls, soup):
@@ -51,4 +53,6 @@ class BonAppetitRecipe(Recipe):
 			container = soup.find(class_='steps')
 			return [item.get_text(strip=True) for item in container.find_all(class_='step')]
 		except Exception as e:
-			print(e, file=sys.stderr)
+			print('Failed to get directions: {}'.format(e), file=sys.stderr)
+
+		return None
