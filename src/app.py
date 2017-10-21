@@ -2,10 +2,12 @@
 
 from sanic import Sanic
 from sanic.response import json
+from sanic_cors import CORS
 
 from scrape import fetch_recipe
 
 app = Sanic()
+CORS(app)
 
 @app.route('/fetch')
 async def fetch(request):
