@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-import seriouseats, bonappetit
+import seriouseats, bonappetit, thekitchn
 
 def fetch_recipe(url):
 	if 'seriouseats.com' in url:
 		return seriouseats.fetch_recipe(url)
 	elif 'bonappetit.com' in url:
 		return bonappetit.fetch_recipe(url)
-	elif 'thekitchen.com' in url:
+	elif 'thekitchn.com' in url:
 		return thekitchn.fetch_recipe(url)
 
 def main():
