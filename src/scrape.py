@@ -7,6 +7,8 @@ def fetch_recipe(url):
 		return seriouseats.fetch_recipe(url)
 	elif 'bonappetit.com' in url:
 		return bonappetit.fetch_recipe(url)
+	elif 'thekitchen.com' in url:
+		return thekitchn.fetch_recipe(url)
 
 def main():
 	pass
