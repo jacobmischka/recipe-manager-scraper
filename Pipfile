@@ -1,0 +1,17 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = false
+name = "pypi"
+
+
+[packages]
+
+requests = "*"
+"beautifulsoup4" = "*"
+sanic = "*"
+
+
+[dev-packages]
+
+pylint = "*"
