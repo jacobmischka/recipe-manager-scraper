@@ -79,7 +79,7 @@ class Recipe(object):
 
 		try:
 			try:
-				recipe_yield = soup.find(itemprop='recipeYield').get_text(strip=True)
+				recipe_yield = soup.find(itemprop='recipeYield').get('content')
 				servings = get_servings_from_str(recipe_yield)[0]
 			except Exception as e:
 				print(e, file=sys.stderr)
